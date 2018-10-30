@@ -17,8 +17,7 @@ val getMove : b: board -> p: player -> q: string -> pit
 
 /// Distributing beans counter clockwise ,
 /// capturing when relevant
-val distribute :
-b: board -> p: player -> i: pit -> board * player * pit
+val distribute : b: board -> p: player -> i: pit -> board * player * pit
 
 /// Interact with the user through getMove to perform
 /// a possibly repeated turn of a player
