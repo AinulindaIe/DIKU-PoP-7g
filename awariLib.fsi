@@ -48,11 +48,6 @@ val isGameOver : b:board -> bool
 /// <returns>The pit the player has chosen</returns>
 val getMove : b:board -> p:player -> q:string -> pit
 
-<<<<<<< HEAD
-/// Distributing beans counter clockwise ,
-/// capturing when relevant
-val distribute : b: board -> p: player -> i: pit -> board * player * pit
-=======
 /// <summary>
 /// Distributing beans counter clockwise, capturing when relevant
 /// </summary>
@@ -61,7 +56,6 @@ val distribute : b: board -> p: player -> i: pit -> board * player * pit
 /// <param name="i">The regular pit to distribute</param>
 /// <returns>A new board after the beans of pit i has been distributed, and which player's pit the last bean landed in</returns>
 val distribute : b:board -> p:player -> i:pit -> board * player * pit
->>>>>>> refs/remotes/origin/master
 
 /// <summary>
 /// Interact with the user through getMove to perform a possibly repeated turn of a player
