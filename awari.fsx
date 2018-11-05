@@ -15,6 +15,7 @@ printf "Enter name player #1: "
 //printf "Hi %s, Enter name player #2: " player1Name
 //let player2Name = Console.ReadLine()
 //printfn "Hi %s! Alright let's play awari" player2Name
+<<<<<<< HEAD
 let b = [|0; 3;3;3;3;3;3; 0; 3;3;3;3;3;3;|]
 let b1 = [|0; 0;0;0;0;0;0; 0; 3;3;3;3;3;3;|]
 printBoard b
@@ -27,6 +28,14 @@ printfn "isGameOver b %b" (isGameOver b)
 printfn "isGameOver b1 %b" (isGameOver b1)
 
 // let c = Console.ReadLine()
+=======
+let b =   [|3;3;3;3;3;3;0; 3;3;3;3;3;3;0|]
+play b Player1
+//printBoard b
+//printBoard b1
+//printfn "%b" (isHome b Player1 0)
+//let c = Console.ReadLine()
+>>>>>>> 395075ea98352da7e9c4a21d5e9b216f9bfacdb6
 //printfn "%b" (isGameOver b)
 //printfn "%b" (isGameOver b1)
 //let endB = (play b Player1)
