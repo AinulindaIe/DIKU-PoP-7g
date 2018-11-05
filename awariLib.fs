@@ -24,10 +24,25 @@ let isHome (b:board) (p:player) (i:pit) : bool =
   | Player1 -> if i = 0 then true else false
   | Player2 -> if i = 7 then true else false
 
+/// <summary>
+/// Check whether the game is over
+/// </summary>
+/// <param name="b"> A board to check</param>
+/// <returns>True if either side has no beans</returns>
 let isGameOver (b:board) : bool =
-  false
+  if Array.fold (+) 0 b1.[1..6] then
+    true
+  elif Array.fold (+) 0 b1.[8..12] then
+    true
+  else
+    false
+
+
 let getMove (b:board) (p:player) (q:string) : pit =
-  10
+  let isValidMove q = System.Int32.TryParse someString
+
+
+
 let distribute (b:board) (p:player) (i:pit) : board * player * pit =
   (b,p,i)
 

@@ -18,9 +18,15 @@ printf "Enter name player #1: "
 let b = [|0; 3;3;3;3;3;3; 0; 3;3;3;3;3;3;|]
 let b1 = [|0; 0;0;0;0;0;0; 0; 3;3;3;3;3;3;|]
 printBoard b
-printBoard b1
-printfn "%b" (isHome b Player1 0)
-let c = Console.ReadLine()
+printfn "isHome Player1 0 %b" (isHome b Player1 0)
+printfn "isHome Player2 0 %b" (isHome b Player2 0)
+printfn "isHome Player1 7 %b" (isHome b Player1 7)
+printfn "isHome Player2 7 %b" (isHome b Player2 7)
+
+printfn "isGameOver b %b" (isGameOver b)
+printfn "isGameOver b1 %b" (isGameOver b1)
+
+// let c = Console.ReadLine()
 //printfn "%b" (isGameOver b)
 //printfn "%b" (isGameOver b1)
 //let endB = (play b Player1)
