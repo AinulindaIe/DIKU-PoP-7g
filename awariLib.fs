@@ -6,16 +6,16 @@ type player = Player1 | Player2
 // intentionally many missing implementations and additions
 let printBoard (b:board) : unit =
   printf "\n%15s" ""
-  for i=1 to 6 do
-    let x = 14-i
+  for i=0 to 5 do
+    let x = 12-i
     printf "|%3d" (b.[x])
   printf  "|\n"
 
-  printf "%12s|%3d|%21s|%3d|\n" "" (b.[13]) "" (b.[6])
+  printf "%11s|%3d|%23s|%3d|\n" "" (b.[13]) "" (b.[6])
 
   printf "%15s" ""
 
-  for i=1 to 6 do
+  for i=0 to 5 do
     printf "|%3d" (b.[i])
   printf  "|\n"
 
@@ -37,7 +37,6 @@ let validMove (s:string) : bool =
 
 let getMove (b:board) (p:player) (q:string) : pit =
   printfn "%s" q
-  printfn "Enter valid pit: "
   let mutable s = System.Console.ReadLine()
   while not (validMove s) do
     printfn "Enter valid pit: "
@@ -47,23 +46,20 @@ let getMove (b:board) (p:player) (q:string) : pit =
   |Player2 -> 6 + (int s)
 
 let distribute (b:board) (p:player) (i:pit) : board * player * pit =
-  let mutable index = 0
-  match p with
-  | Player1 -> index <- i
-  | Player2 -> index <- i + 6
-  let mutable newB = b
-  let mutable newI = 0
-  newB.[index] <- 0
-  for i = 1 to b.[index] + 1 do
-    newI <- (i+index)%14
-    newB.[newI] <- b.[newI] + 1
-  if newB.[newI] = 1 then
+  let finalPit    = (i + b.[i])%14
+  let mutable n = b
+  for j=1 to b.[i] do
+    let index = (i+j)%14
+    n.[index] <- b.[index] + 1
+  n.[i] <- 0
+  if n.[finalPit] = 1 && not (isHome n p finalPit) then
     match p with
-    | Player1 -> newB.[6] <-  newB.[6] + newB.[newI] + newB.[12-newI]
-    | Player2 -> newB.[13] <- newB.[6] +  newB.[newI] + newB.[12-newI]
-    newB.[newI] <- 0
-    newB.[12-newI] <- 0
-  (newB, p, newI)
+    | Player1 -> n.[6] <- n.[6] + n.[12-finalPit] + 1
+    | Player2 -> n.[13] <- n.[13] + n.[12-finalPit] + 1
+    n.[12-finalPit] <- 0
+    n.[finalPit]    <- 0
+  (n, p, finalPit)
+
 
 let turn (b : board) (p : player) : board =
   let rec repeat (b: board) (p: player) (n: int) : board =
