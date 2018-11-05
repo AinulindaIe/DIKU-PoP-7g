@@ -36,9 +36,9 @@ let isGameOver (b:board) : bool =
 
 let validMove (s:string) : bool =
   let n = "123456"
-  if s.Length > 1 then false
-  elif (String.exists (fun c -> c = (char s)) n) then true
-  else false
+  if not (s.Length = 1)  then false
+  elif not (String.exists (fun c -> c = (char s)) n) then false
+  else true
 
 let getMove (b:board) (p:player) (q:string) : pit =
   printfn "%s" q
