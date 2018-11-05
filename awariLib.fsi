@@ -39,6 +39,8 @@ val isHome : b:board -> p:player -> i:pit -> bool
 /// <returns>True if either side has no beans</returns>
 val isGameOver : b:board -> bool
 
+val validMove : s:string -> bool
+
 /// <summary>
 /// Get the pit of next move from the user
 /// </summary>

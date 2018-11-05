@@ -11,7 +11,7 @@ let printBoard (b:board) : unit =
     printf "|%3d" (b.[x])
   printf  "|\n"
 
-  printf "%12s|%3d|%21s|%3d|\n" "" (b.[7]) "" (b.[0])
+  printf "%12s|%3d|%21s|%3d|\n" "" (b.[13]) "" (b.[6])
 
   printf "%15s" ""
 
@@ -21,15 +21,49 @@ let printBoard (b:board) : unit =
 
 let isHome (b:board) (p:player) (i:pit) : bool =
   match p with
-  | Player1 -> if i = 0 then true else false
-  | Player2 -> if i = 7 then true else false
+  | Player1 -> if i = 6 then true else false
+  | Player2 -> if i = 13 then true else false
 
 let isGameOver (b:board) : bool =
-  false
+  if    Array.fold (+) 0 b.[0..5]  = 0 then true
+  elif  Array.fold (+) 0 b.[7..12] = 0 then true
+  else false
+
+let validMove (s:string) : bool =
+  let n = "123456"
+  if s.Length > 1 then false
+  elif (String.exists (fun c -> c = (char s)) n) then true
+  else false
+
 let getMove (b:board) (p:player) (q:string) : pit =
-  10
+  printfn "%s" q
+  printfn "Enter valid pit: "
+  let mutable s = System.Console.ReadLine()
+  while not (validMove s) do
+    printfn "Enter valid pit: "
+    s <- System.Console.ReadLine()
+  match p with
+  |Player1 -> (int s) - 1
+  |Player2 -> 6 + (int s)
+
 let distribute (b:board) (p:player) (i:pit) : board * player * pit =
-  (b,p,i)
+  let mutable index = 0
+  match p with
+  | Player1 -> index <- i
+  | Player2 -> index <- i + 6
+  let mutable newB = b
+  let mutable newI = 0
+  newB.[index] <- 0
+  for i = 1 to b.[index] + 1 do
+    newI <- (i+index)%14
+    newB.[newI] <- b.[newI] + 1
+  if newB.[newI] = 1 then
+    match p with
+    | Player1 -> newB.[6] <-  newB.[6] + newB.[newI] + newB.[12-newI]
+    | Player2 -> newB.[13] <- newB.[6] +  newB.[newI] + newB.[12-newI]
+    newB.[newI] <- 0
+    newB.[12-newI] <- 0
+  (newB, p, newI)
 
 let turn (b : board) (p : player) : board =
   let rec repeat (b: board) (p: player) (n: int) : board =
