@@ -4,16 +4,34 @@ type board = int array
 type player = Player1 | Player2
 
 let printBoard (b:board) : unit =
-  printf "\n%15s" ""
-  for i=0 to 5 do
-    let x = 12-i
-    printf "|%3d" (b.[x])
-  printf  "|\n"
-  printf "%11s|%3d|%23s|%3d|\n" "" (b.[13]) "" (b.[6])
-  printf "%15s" ""
-  for i=0 to 5 do
-    printf "|%3d" (b.[i])
-  printf  "|\n"
+  System.Console.Clear()
+  printfn "     _____                             _ "
+  printfn "    / _   |  __ __  ___  ___   ____   |_|"
+  printfn "   / / |  | |  |  |/  / /   | |  _ \\   _"
+  printfn "  / /__|  | |        / / /| | | |_| | | |"
+  printfn " /  ____  | |   /|  / / /_| | |    /  | |"
+  printfn "/_ /    |_| |__/ |_/ /_/  |_| |_|\\_\\  |_|\n"
+  printfn "              P L A Y E R 2"
+  printfn "          6   5   4   3   2   1"
+  printfn "         _______________________"
+  printfn "        |   |   |   |   |   |   |"
+  printf  " P  ____|"
+  for i = 0 to 5 do
+    let x = 12 - i
+    printf "%3d|" (b.[x])
+  printfn "____  P"
+  printfn " L |    |   |   |   |   |   |   |    | L"
+  printfn " A |    |   |   |   |   |   |   |    | A"
+  printfn " Y | %2d |   |   |   |   |   |   | %2d | Y" (b.[13]) (b.[6])
+  printfn " E |    |   |   |   |   |   |   |    | E"
+  printfn " R |____|   |   |   |   |   |   |____| R"
+  printf  " 2      |"
+  for i = 0 to 5 do
+    printf "%3d|" (b.[i])
+  printfn "      1"
+  printfn "        |___|___|___|___|___|___|"
+  printfn "          1   2   3   4   5   6 "
+  printfn "              P L A Y E R 1"
 
 let isHome (b:board) (p:player) (i:pit) : bool =
   match p with
