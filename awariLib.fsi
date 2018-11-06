@@ -44,7 +44,7 @@ val isGameOver : b:board -> bool
 /// </summary>
 /// <param name="s">A string with a move</param>
 /// <returns>True only if the string has lengte = 1 and is contains 1, 2 3,4, 5 or 6.</returns>
-val validMove : s:string -> bool
+val validMove : b:board -> p:player -> s:string -> bool
 
 /// <summary>
 /// Get the pit of next move from the user

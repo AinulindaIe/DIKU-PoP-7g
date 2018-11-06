@@ -43,16 +43,19 @@ let isGameOver (b:board) : bool =
   elif  Array.fold (+) 0 b.[7..12] = 0 then true
   else false
 
-let validMove (s:string) : bool =
+let validMove (b:board) (p:player) (s:string) : bool =
   let n = "123456"
   if not (s.Length = 1)  then false
   elif not (String.exists (fun c -> c = (char s)) n) then false
-  else true
+  else  match p with
+        |Player1 -> if b.[(int s - 1)] = 0 then false else true
+        |Player2 -> if b.[(int s) + 6] = 0 then false else true
+
 
 let getMove (b:board) (p:player) (q:string) : pit =
   printfn "%s" q
   let mutable s = System.Console.ReadLine()
-  while not (validMove s) do
+  while not (validMove b p s) do
     printfn "Enter valid pit: "
     s <- System.Console.ReadLine()
   match p with
@@ -91,7 +94,18 @@ let turn (b : board) (p : player) : board =
 
 let rec play (b : board) (p : player) : board =
   if isGameOver b then
-    b
+    printBoard b
+    if b.[6] > b.[13] then
+      printfn "Congratulations Player 1! You've won!"
+    else
+      printfn "Congratulations Player 2! You've won!"
+    printfn "Want to play again? (Y/N)"
+    let answer = System.Console.ReadLine()
+    match answer with
+    | "Y" ->  play [|3;3;3;3;3;3;0; 3;3;3;3;3;3;0|] Player1
+    | "N" ->  b
+    | _   ->  printfn "couldn't understand, ending game..."
+              b
   else
     let newB = turn b p
     let nextP =
