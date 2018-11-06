@@ -39,6 +39,11 @@ val isHome : b:board -> p:player -> i:pit -> bool
 /// <returns>True if either side has no beans</returns>
 val isGameOver : b:board -> bool
 
+/// <summary>
+/// Check whether move is a valid move
+/// </summary>
+/// <param name="s">A string with a move</param>
+/// <returns>True only if the string has lengte = 1 and is contains 1, 2 3,4, 5 or 6.</returns>
 val validMove : s:string -> bool
 
 /// <summary>
