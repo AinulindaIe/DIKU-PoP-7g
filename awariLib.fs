@@ -3,18 +3,14 @@ type pit = int
 type board = int array
 type player = Player1 | Player2
 
-// intentionally many missing implementations and additions
 let printBoard (b:board) : unit =
   printf "\n%15s" ""
   for i=0 to 5 do
     let x = 12-i
     printf "|%3d" (b.[x])
   printf  "|\n"
-
   printf "%11s|%3d|%23s|%3d|\n" "" (b.[13]) "" (b.[6])
-
   printf "%15s" ""
-
   for i=0 to 5 do
     printf "|%3d" (b.[i])
   printf  "|\n"
@@ -24,11 +20,6 @@ let isHome (b:board) (p:player) (i:pit) : bool =
   | Player1 -> if i = 6 then true else false
   | Player2 -> if i = 13 then true else false
 
-/// <summary>
-/// Check whether the game is over
-/// </summary>
-/// <param name="b"> A board to check</param>
-/// <returns>True if either side has no beans</returns>
 let isGameOver (b:board) : bool =
   if    Array.fold (+) 0 b.[0..5]  = 0 then true
   elif  Array.fold (+) 0 b.[7..12] = 0 then true
