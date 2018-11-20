@@ -1,9 +1,6 @@
 module Awari
-///  Each player has a set of regular pits and one home pit. A pit holds zero or more beans
-type pit = int// intentionally left empty
-/// A board consists of pits.
+type pit = int
 type board = int array
-/// A game is played between two players
 type player = Player1 | Player2
 
 /// <summary>
@@ -43,7 +40,7 @@ val isGameOver : b:board -> bool
 /// Check whether move is a valid move
 /// </summary>
 /// <param name="s">A string with a move</param>
-/// <returns>True only if the string has lengte = 1 and is contains 1, 2 3,4, 5 or 6.</returns>
+/// <returns>True only if the string has length = 1 and contains 1, 2, 3, 4, 5 or 6.</returns>
 val validMove : b:board -> p:player -> s:string -> bool
 
 /// <summary>
